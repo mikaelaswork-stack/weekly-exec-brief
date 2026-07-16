@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Weekly Executive Brief",
+  "schemaVersion": 1,
+  "description": "Weekly CEO-facing roll-up combining Field Reports (Store Visit Expense Log, Post Event Recap Log, Post In-Market Visit Recap Log), Pipeline Coaching (MK — Team Pipeline & Coaching Master), and Deal Approval Requests — all pulled live from monday.com using the same boards/columns as their respective source dashboards. Project Movement is a static snapshot of the Project Tracker artifact's state (which lives in that artifact's local storage, not monday.com) and should be refreshed on request.",
+  "mcpTools": [
+    "mcp__17255b2a-a85e-4fd7-9796-d03234627382__get_board_items_page"
+  ],
+  "mcpServerNames": [
+    "monday.com"
+  ]
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SALT Money — Weekly Executive Brief</title>
+<style>
+  :root {
+    color-scheme: light;
+    /* Pastel sky — blues & greens, ombre, cloud-cute */
+    --navy: #3a6a8a;          /* headline ink — dusty sky blue */
+    --navy-light: #7fb3d3;    /* lighter sky blue for gradients */
+    --accent: #4fae8b;        /* soft leafy teal-green — numbers, ticks, ornaments */
+    --red: #e8837a;           /* soft coral — flags/negative, never alarm-red */
+    --red-light: #fdeceb;
+    --amber: #d9a441;
+    --amber-light: #fbf0da;
+    --green: #4c8c68;         /* leafy green — positive/approved */
+    --green-light: #e3f3ea;
+    --gray-50: #f2f9fb;       /* page fallback — icy blue-white */
+    --gray-100: #e8f4f1;      /* pale mint tint for tags/rows */
+    --gray-200: #cfe8e2;
+    --gray-400: #8fb3ae;
+    --gray-500: #6b8a99;
+    --gray-700: #375a56;
+    --gray-900: #23414a;      /* body ink — deep slate blue, soft not black */
+    --border: #cfe3ea;
+    --serif: "Cormorant Garamond", "Big Caslon", Didot, Garamond, Georgia, serif;
+    --sans: "Baloo 2", Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI", Verdana, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 10% 6%, rgba(255,255,255,0.85), rgba(255,255,255,0) 20%),
+      radial-gradient(circle at 85% 4%, rgba(255,255,255,0.75), rgba(255,255,255,0) 16%),
+      radial-gradient(circle at 25% 96%, rgba(255,255,255,0.55), rgba(255,255,255,0) 18%),
+      radial-gradient(circle at 92% 80%, rgba(255,255,255,0.5), rgba(255,255,255,0) 16%),
+      linear-gradient(165deg, #e7f5fc 0%, #ddf1f0 30%, #e3f6ea 65%, #ecf9ee 100%);
+    background-attachment: fixed;
+    color: var(--gray-900);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.65;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'><ellipse cx='13' cy='21' rx='9' ry='6.5' fill='%23BFE3F7'/><ellipse cx='20' cy='16' rx='8' ry='6.5' fill='%23D9EFFB'/><ellipse cx='24' cy='21' rx='6.5' ry='5.5' fill='%23BFE3F7'/><ellipse cx='16' cy='23' rx='10' ry='5.5' fill='%23EAF7FF'/><ellipse cx='16' cy='23' rx='10' ry='5.5' fill='none' stroke='%23AFD8EE' stroke-width='0.7'/></svg>") 6 20, auto;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 30px 30px 64px; }
+
+  header.brief-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 20px 26px;
+    margin-bottom: 26px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.88), rgba(217,239,251,0.65));
+    border: 1px solid var(--border);
+    box-shadow: 0 14px 30px -18px rgba(58,106,138,0.35);
+  }
+  header.brief-header h1 {
+    margin: 0 0 4px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 30px;
+    color: var(--navy);
+    letter-spacing: 0.01em;
+  }
+  header.brief-header .sub {
+    color: var(--gray-500);
+    font-size: 12.5px;
+    letter-spacing: .02em;
+    font-weight: 600;
+  }
+  .header-actions { display: flex; align-items: center; gap: 10px; }
+  .btn {
+    border: none;
+    background: linear-gradient(135deg, var(--navy-light), var(--accent));
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    cursor: pointer;
+    font-family: var(--sans);
+    box-shadow: 0 10px 20px -10px rgba(58,106,138,0.5);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 24px -10px rgba(58,106,138,0.6); }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 30px; }
+  .kpi {
+    background: rgba(255,255,255,0.82);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 16px 18px;
+    box-shadow: 0 10px 22px -16px rgba(58,106,138,0.3);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .kpi:hover { transform: translateY(-3px); box-shadow: 0 14px 26px -14px rgba(79,174,139,0.35); }
+  .kpi .label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--gray-500); font-weight: 700; }
+  .kpi .value { font-family: var(--serif); font-style: italic; font-size: 26px; font-weight: 600; color: var(--navy); margin-top: 5px; }
+  .kpi .value.warn { color: var(--red); }
+  .kpi .foot { font-size: 11.5px; color: var(--gray-400); margin-top: 3px; }
+
+  section.block { margin-bottom: 32px; }
+  .block-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; flex-wrap: wrap; gap: 6px; }
+  .block-head h2 {
+    font-family: var(--serif); font-style: italic; font-weight: 600;
+    font-size: 19px; color: var(--navy); margin: 0; display: flex; align-items: center; gap: 8px;
+  }
+  .block-head .count-pill { background: var(--gray-100); color: var(--navy); font-size: 11px; font-weight: 700; border-radius: 999px; padding: 2px 10px; font-family: var(--sans); }
+  .block-head .desc { font-size: 11.5px; color: var(--gray-500); }
+  .snapshot-tag {
+    display: inline-block; background: var(--amber-light); color: var(--amber);
+    font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 999px; margin-left: 6px;
+    text-transform: uppercase; letter-spacing: .02em; font-style: normal; font-family: var(--sans);
+  }
+
+  .card { background: rgba(255,255,255,0.85); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 24px -18px rgba(58,106,138,0.25); }
+
+  .cloud-card { background: linear-gradient(135deg, #eef8fd, #eaf7ef); padding: 4px; }
+  .sky-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .sky-item { display: flex; align-items: flex-start; gap: 10px; padding: 16px 18px; }
+  .sky-item .sky-emoji { font-size: 20px; line-height: 1.1; }
+  .sky-item .sky-text { font-size: 13px; color: var(--gray-900); line-height: 1.55; }
+  .sky-item .sky-text strong { color: var(--navy); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    text-align: left; background: var(--gray-100); color: var(--navy); font-size: 10.5px;
+    text-transform: uppercase; letter-spacing: .05em; font-weight: 700; padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap;
+  }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--gray-100); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--gray-100); }
+
+  .badge { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; letter-spacing: .01em; }
+  .badge.status-not-started, .badge.status-pending-review, .badge.status-todo { background: var(--gray-100); color: var(--gray-700); }
+  .badge.status-in-progress, .badge.status-contacted, .badge.status-networking-event { background: #e3ecfb; color: #4462a8; }
+  .badge.status-at-risk, .badge.status-negotiation { background: var(--amber-light); color: var(--amber); }
+  .badge.status-blocked, .badge.status-denied, .badge.status-stuck { background: var(--red-light); color: var(--red); }
+  .badge.status-complete, .badge.status-approved, .badge.status-done, .badge.status-uw-approved { background: var(--green-light); color: var(--green); }
+  .badge.status-on-hold, .badge.status-withdrawn { background: var(--gray-100); color: var(--gray-500); }
+  .badge.priority-p0 { background: var(--red-light); color: var(--red); }
+  .badge.priority-p1 { background: var(--amber-light); color: var(--amber); }
+  .badge.priority-p2 { background: var(--gray-100); color: var(--gray-700); }
+  .type-pill { background: var(--gray-100); color: var(--navy); font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap; text-transform: uppercase; letter-spacing: .03em; }
+
+  .flag {
+    display: inline-block; background: linear-gradient(135deg, var(--navy-light), var(--accent));
+    color: #fff; font-size: 9.5px; font-weight: 700; padding: 2px 9px; border-radius: 999px; margin-left: 6px;
+    letter-spacing: .02em; text-transform: uppercase; vertical-align: middle;
+  }
+
+  .empty-state { padding: 30px 16px; text-align: center; color: var(--gray-400); font-size: 13px; }
+  .empty-state::before { content: "☁️ "; }
+  .err-banner { background: var(--red-light); color: #a24a58; border: 1px solid var(--red); border-radius: 14px; padding: 10px 14px; font-size: 12.5px; margin-bottom: 10px; }
+
+  .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px; }
+  .visit-card {
+    border: 1px solid var(--border); border-radius: 16px; padding: 14px 16px; background: #ffffff;
+    box-shadow: 0 6px 16px -12px rgba(58,106,138,0.22);
+  }
+  .visit-card h3 { margin: 0 0 3px; font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 15px; color: var(--navy); }
+  .visit-card .meta { font-size: 11px; color: var(--gray-500); margin-bottom: 9px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .visit-card dl { margin: 0; }
+  .visit-card dt { font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); font-weight: 700; margin-top: 9px; }
+  .visit-card dt:first-of-type { margin-top: 0; }
+  .visit-card dd { margin: 2px 0 0; font-size: 12.5px; color: var(--gray-900); }
+  .stars { color: var(--accent); letter-spacing: 1px; font-size: 12px; }
+
+  .coach-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .subhead { font-family: var(--serif); font-style: italic; font-size: 14.5px; font-weight: 600; color: var(--navy); padding: 12px 16px 6px; }
+  .progress-row { padding: 9px 16px; }
+  .progress-row .top { display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 5px; }
+  .progress-row .name { font-weight: 600; color: var(--gray-900); }
+  .progress-row .nums { color: var(--gray-500); font-variant-numeric: tabular-nums; }
+  .bar { height: 7px; background: var(--gray-100); border-radius: 999px; overflow: hidden; }
+  .bar > div { height: 100%; background: linear-gradient(90deg, var(--navy-light), var(--accent)); border-radius: 999px; }
+  .bar > div.behind { background: var(--red); }
+  .progress-row .note { font-size: 11.5px; color: var(--gray-500); margin-top: 4px; }
+
+  .proj-card {
+    border: 1px solid var(--border); border-radius: 16px; padding: 16px 18px; margin: 16px; background: #ffffff;
+    box-shadow: 0 6px 16px -12px rgba(58,106,138,0.22);
+  }
+  .proj-card + .proj-card { margin-top: 0; }
+  .proj-card h3 {
+    margin: 0 0 5px; font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 17px;
+    color: var(--navy); display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .proj-card .proj-desc { font-size: 12px; color: var(--gray-500); margin-bottom: 12px; }
+  .phase-row { border-top: 1px dashed var(--gray-200); padding: 10px 0; }
+  .phase-row:first-of-type { border-top: none; }
+  .phase-row .phase-title { font-weight: 700; font-size: 12.5px; color: var(--gray-900); display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+  .phase-row .phase-desc { font-size: 12px; color: var(--gray-500); margin-bottom: 6px; }
+  .task-line { display: flex; gap: 8px; align-items: baseline; font-size: 12.5px; padding: 4px 0; flex-wrap: wrap; }
+  .task-line .task-title { font-weight: 600; color: var(--gray-900); }
+  .task-line .task-meta { color: var(--gray-500); font-size: 11.5px; }
+  .note-callout { background: var(--gray-100); color: var(--amber); border-radius: 12px; padding: 9px 12px; font-size: 11.5px; margin-top: 6px; }
+  .other-init { font-size: 12px; color: var(--gray-500); padding: 12px 18px 18px; border-top: 1px dashed var(--gray-200); }
+
+  .legend { font-size: 11.5px; color: var(--gray-500); padding: 10px 14px 14px; }
+
+  .rep-strip { display: flex; gap: 10px; padding: 6px 16px 12px; flex-wrap: wrap; }
+  .rep-pill {
+    background: var(--gray-100); border-radius: 999px; padding: 5px 14px; font-size: 12px; color: var(--navy);
+    display: flex; align-items: center; gap: 6px; font-weight: 600;
+  }
+  .rep-pill .rep-num { font-family: var(--serif); font-style: italic; color: var(--accent); font-size: 13px; }
+  .activity-row {
+    display: flex; gap: 10px; align-items: baseline; padding: 9px 16px; border-top: 1px solid var(--gray-100);
+    font-size: 12.5px; flex-wrap: wrap;
+  }
+  .activity-row:first-of-type { border-top: none; }
+  .activity-row .a-merchant { font-weight: 700; color: var(--navy); min-width: 160px; }
+  .activity-row .a-note { color: var(--gray-700); flex: 1 1 260px; }
+  .activity-row .a-date { color: var(--gray-400); font-size: 11px; white-space: nowrap; }
+  .activity-footnote { font-size: 11.5px; color: var(--gray-400); padding: 10px 16px 14px; border-top: 1px dashed var(--gray-200); }
+
+  footer.brief-footer {
+    margin-top: 30px; padding: 16px 22px; border-radius: 18px; font-size: 11px; color: var(--gray-500);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px;
+    background: rgba(255,255,255,0.6); border: 1px solid var(--border);
+  }
+
+  #loading { padding: 70px 0; text-align: center; color: var(--gray-500); font-family: var(--serif); font-style: italic; font-size: 15px; }
+  .spinner {
+    width: 24px; height: 24px; border: 3px solid var(--gray-200); border-top-color: var(--accent);
+    border-radius: 50%; display: inline-block; animation: spin .9s linear infinite; margin-bottom: 12px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media print {
+    body { background: #fff; cursor: auto; }
+    .header-actions { display: none; }
+    .kpi, .card { break-inside: avoid; }
+    section.block { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="brief-header">
+    <div>
+      <h1>☁️ SALT Money — Weekly Executive Brief</h1>
+      <div class="sub" id="week-range">Loading week range…</div>
+    </div>
+    <div class="header-actions">
+      <button class="btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+    </div>
+  </header>
+
+  <div id="loading"><div class="spinner"></div><div>☁️ Pulling this week's data from monday.com…</div></div>
+
+  <div id="content" style="display:none">
+
+    <section class="block cloud-view">
+      <div class="block-head">
+        <h2>☁️ The Week, From Up Here</h2>
+        <span class="desc">A plain-numbers look across every section below — reported straight, no spin either way</span>
+      </div>
+      <div class="card cloud-card" id="cloud-summary"></div>
+    </section>
+
+    <div class="kpi-row" id="kpi-row"></div>
+
+    <section class="block">
+      <div class="block-head">
+        <h2>🏗️ Project Movement <span class="count-pill" id="proj-count">0</span><span class="snapshot-tag">Static snapshot — ask Claude to refresh</span></h2>
+        <span class="desc">Manually confirmed from the Project Tracker artifact (locally stored, not on monday.com) as of <span id="proj-snapshot-date"></span></span>
+      </div>
+      <div class="card" id="proj-card-wrap"></div>
+    </section>
+
+    <section class="block">
+      <div class="block-head">
+        <h2>🚗 In-Market Sales Activity <span class="count-pill" id="visit-count">0</span></h2>
+        <span class="desc">Field reports logged this week — Store Visit Expense, Event Recap &amp; In-Market Visit logs</span>
+      </div>
+      <div class="card"><div id="visit-body"></div></div>
+
+      <div class="card" style="margin-top:16px;">
+        <div class="subhead" style="display:flex;align-items:baseline;justify-content:space-between;padding-right:16px;">
+          <span>📞 Team Sales Activity Log <span class="count-pill" id="activity-count">0</span></span>
+          <span class="desc" style="font-size:11px;">Calls, texts &amp; emails — Sales Activity Log</span>
+        </div>
+        <div id="activity-rep-strip"></div>
+        <div id="activity-log-body"></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="block-head">
+        <h2>📈 Pipeline Coaching</h2>
+        <span class="desc">Weekly rep activity, monthly targets, and at-risk deals — Team Pipeline &amp; Coaching (Master)</span>
+      </div>
+      <div class="coach-cols">
+        <div class="card">
+          <div class="subhead">🎯 Weekly Activity vs. Target</div>
+          <div id="weekly-activity-body"></div>
+        </div>
+        <div class="card">
+          <div class="subhead">🤝 July Deal Targets</div>
+          <div id="monthly-target-body"></div>
+        </div>
+      </div>
+      <div class="block-head" style="margin-top:2px;">
+        <h2 style="font-size:13.5px;">⚠️ At-Risk Deals <span class="count-pill" id="atrisk-count">0</span></h2>
+        <span class="desc">45+ days without logged activity</span>
+      </div>
+      <div class="card"><div id="atrisk-body"></div></div>
+    </section>
+
+    <section class="block">
+      <div class="block-head">
+        <h2>✅ Deal Approvals <span class="count-pill" id="approval-count">0</span></h2>
+        <span class="desc">Leadership approval requests — pending and decided this week</span>
+      </div>
+      <div class="card"><div id="approval-body"></div></div>
+    </section>
+
+  </div>
+
+  <footer class="brief-footer">
+    <span>🌱 Live sources: Store Visit Expense Log · Post Event Recap Log · Post In-Market Visit Recap Log · MK — Team Pipeline &amp; Coaching (Master) · Deal Approval Requests. Project Movement: static snapshot of the Project Tracker artifact.</span>
+    <span id="gen-stamp"></span>
+  </footer>
+
+</div>
+
+<script>
+const MONDAY = 'mcp__17255b2a-a85e-4fd7-9796-d03234627382__get_board_items_page';
+
+function esc(s){
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function slug(s){ return (s||'').toString().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+function statusEmoji(label){
+  const l = (label || '').toLowerCase();
+  if (/approved|done|complete|closed[- ]won/.test(l)) return '✅ ';
+  if (/denied|blocked|stuck/.test(l)) return '🚫 ';
+  if (/at.?risk/.test(l)) return '⚠️ ';
+  if (/in progress|working on it/.test(l)) return '⏳ ';
+  if (/pending|review|to ?do|not started/.test(l)) return '📝 ';
+  if (/negotiation/.test(l)) return '🤝 ';
+  if (/event/.test(l)) return '🎪 ';
+  if (/contacted/.test(l)) return '📞 ';
+  if (/hold|withdrawn/.test(l)) return '⏸️ ';
+  return '';
+}
+function badge(label, extraClass){
+  if (!label) return '<span class="badge status-not-started">—</span>';
+  return `<span class="badge ${extraClass||('status-'+slug(label))}">${statusEmoji(label)}${esc(label)}</span>`;
+}
+function parseDate(str){
+  if (!str) return null;
+  const first = String(str).split(' - ')[0].trim();
+  // Full ISO timestamps (e.g. item.created_at like "2026-07-15T21:50:35Z") must be parsed as-is —
+  // appending "T00:00:00" to a string that already has a "T" produces an invalid date, which was
+  // silently making every field-report record fail the "within last 7 days" check.
+  const d = first.includes('T') ? new Date(first) : new Date(first + 'T00:00:00');
+  return isNaN(d.getTime()) ? null : d;
+}
+function daysAgo(dateStr){
+  const d = parseDate(dateStr);
+  if (!d) return null;
+  return Math.floor((Date.now() - d.getTime()) / 86400000);
+}
+function withinLastDays(dateStr, n){
+  const d = daysAgo(dateStr);
+  return d !== null && d >= 0 && d <= n;
+}
+function fmtDate(dateStr){
+  const d = parseDate(dateStr);
+  if (!d) return '—';
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+function num(v, fallback){
+  const n = parseFloat(v);
+  return isNaN(n) ? (fallback === undefined ? 0 : fallback) : n;
+}
+function emptyRow(msg){ return `<div class="empty-state">${esc(msg)}</div>`; }
+
+async function fetchAllItems(boardId){
+  let items = [];
+  let cursor = null;
+  let guard = 0;
+  do {
+    const args = { boardId, includeColumns: true, limit: 500 };
+    if (cursor) args.cursor = cursor;
+    const r = await window.cowork.callMcpTool(MONDAY, args);
+    if (r && r.isError) {
+      const msg = (r.content && r.content[0] && r.content[0].text) || 'Unknown error';
+      throw new Error(msg);
+    }
+    const data = r.structuredContent ?? JSON.parse(r.content[0].text);
+    items = items.concat(data.items || []);
+    cursor = (data.pagination && data.pagination.has_more) ? data.pagination.nextCursor : null;
+    guard++;
+  } while (cursor && guard < 20);
+  return items;
+}
+
+function cv(item, colId){ return item.column_values ? item.column_values[colId] : undefined; }
+
+// ---------- Week range ----------
+function renderWeekRange(){
+  const end = new Date();
+  const start = new Date(Date.now() - 6*86400000);
+  const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  document.getElementById('week-range').textContent =
+    `🌤️ Week of ${fmt(start)} – ${fmt(end)}, ${end.getFullYear()} · generated ${end.toLocaleString('en-US', { month:'short', day:'numeric', hour:'numeric', minute:'2-digit' })}`;
+  document.getElementById('gen-stamp').textContent = '🔄 Reload this view to pull the latest week’s live data.';
+}
+
+// ================= FIELD REPORTS (3 boards — same as Field Reports artifact) =================
+const FIELD_BOARDS = [
+  { id: 18421484832, type: 'Store Visit' },
+  { id: 18421484841, type: 'Event Recap' },
+  { id: 18421484858, type: 'In-Market Visit' },
+];
+
+// Same "needs follow-up" definition as the Field Reports artifact's buildRecord(),
+// so a card is flagged here exactly when it would be flagged there.
+function boolish(v){
+  if (!v) return false;
+  const s = String(v).toLowerCase();
+  return s === 'v' || s === 'true' || s === 'yes';
+}
+function isNegativeFlag(v){
+  if (!v) return true;
+  const s = String(v).toLowerCase();
+  return s === 'no' || s === 'false';
+}
+
+function buildFieldRecord(type, item){
+  const c = item.column_values || {};
+  let rec = { type, name: item.name, date: item.created_at, url: item.url };
+  if (type === 'Store Visit'){
+    rec.location = c.short_textmsne2hog || '—';
+    rec.headline = c.long_textce5ao5fk || c.short_texth4zddrsv || '—';
+    rec.metric = c.numberw4991lft ? '$' + c.numberw4991lft + ' expensed' : null;
+    rec.opportunity = c.long_textbfwr8pst || '—';
+    rec.nextStep = c.long_textgjbrh1q9 || '—';
+    rec.flagRaw = null;
+    rec.needsFollowUp = boolish(c.boolean0cfr5wtb) || !!c.long_textgjbrh1q9;
+  } else if (type === 'Event Recap'){
+    rec.location = c.short_textievnufa6 || '—';
+    rec.headline = c.short_textgcmhcnee || '—';
+    const leads = c.numberhcb5jvxi ? c.numberhcb5jvxi + ' qualified leads' : null;
+    const q = c.ratingczmwdwbw ? c.ratingczmwdwbw + '/5 quality' : null;
+    rec.metric = [q, leads].filter(Boolean).join(' · ') || null;
+    rec.opportunity = c.long_textogckkdq1 || '—';
+    rec.nextStep = c.long_text56t5y7zv || '—';
+    rec.flagRaw = null;
+    const worthIt = c.single_selectjua5br1 || c.single_selecthh8s14r;
+    rec.needsFollowUp = !isNegativeFlag(worthIt) && !!(c.long_text56t5y7zv || c.long_textn0sij2la);
+  } else {
+    rec.location = c.short_textxvtvf9u7 || '—';
+    rec.headline = c.single_selectefw8p8x || '—';
+    rec.metric = c.ratinguev7urkq ? c.ratinguev7urkq + '/5 opportunity' : null;
+    rec.opportunity = c.long_textb5o5hxdw || '—';
+    rec.nextStep = c.long_texts0vi1qqs || '—';
+    rec.flagRaw = c.long_texttnv910pv || null;
+    const prioritize = c.single_selectlowbbnr;
+    rec.needsFollowUp = !isNegativeFlag(prioritize) && !!(c.long_texts0vi1qqs || c.long_texthwx9mrnu);
+  }
+  rec.hasLeadershipAlert = !!(rec.flagRaw && !/^not at the moment$|^no$|^none$|^n\/a$/i.test(rec.flagRaw.trim()));
+  return rec;
+}
+
+function renderVisits(records){
+  const thisWeek = records.filter(r => withinLastDays(r.date, 7)).sort((a,b) => new Date(b.date) - new Date(a.date));
+  document.getElementById('visit-count').textContent = thisWeek.length;
+  const body = document.getElementById('visit-body');
+  if (!thisWeek.length){
+    body.innerHTML = emptyRow('No field reports (store visits, events, or in-market visits) logged in the last 7 days.');
+    return thisWeek;
+  }
+  const cards = thisWeek.map(r => `
+    <div class="visit-card">
+      <h3>${esc(r.name)}${r.hasLeadershipAlert ? '<span class="flag" style="background:var(--red);">🚩 FLAG FOR LEADERSHIP</span>' : (r.needsFollowUp ? '<span class="flag">📌 NEEDS FOLLOW-UP</span>' : '')}</h3>
+      <div class="meta"><span class="type-pill">${esc(r.type)}</span> ${esc(r.location)} · ${fmtDate(r.date)}${r.metric ? ' · ' + esc(r.metric) : ''}</div>
+      <dl>
+        <dt>${r.type === 'Event Recap' ? 'Event' : (r.type === 'Store Visit' ? 'Visit reason' : 'Purpose')}</dt><dd>${esc(r.headline)}</dd>
+        <dt>${r.type === 'Event Recap' ? 'Biggest opportunity / risk' : 'Opportunity / deal impact'}</dt><dd>${esc(r.opportunity)}</dd>
+        <dt>Next step</dt><dd>${esc(r.nextStep)}</dd>
+        ${r.hasLeadershipAlert ? `<dt>Leadership alert</dt><dd style="color:var(--red);font-weight:600;">${esc(r.flagRaw)}</dd>` : ''}
+      </dl>
+    </div>`).join('');
+  body.innerHTML = `<div class="visit-grid">${cards}</div>`;
+  return thisWeek;
+}
+
+// ================= TEAM SALES ACTIVITY LOG (calls/texts/emails — same board the Field Reports artifact links to) =================
+const ACTIVITY_LOG_BOARD = 18418721978;
+
+function repLabel(raw){
+  if (raw && typeof raw === 'string') return raw;
+  return 'Unassigned';
+}
+function stageLabel(raw){
+  if (raw === null || raw === undefined) return null;
+  if (typeof raw === 'string') return raw;
+  if (typeof raw === 'object' && raw.index === 5) return 'Lead';
+  return null;
+}
+// Bulk prospecting touches ("emailed", "texted", single-word notes) are real activity but too
+// numerous/low-signal for an exec read — they're counted in the rep totals but not listed individually.
+function isGenericTouch(name){
+  const n = (name || '').trim().toLowerCase();
+  if (!n) return true;
+  if (['emailed','email','email sent','texted','called','notes','test','test 1','k','l'].includes(n)) return true;
+  return n.split(/\s+/).filter(Boolean).length <= 2;
+}
+
+async function fetchActivityLogThisWeek(){
+  let items = [];
+  let cursor = null;
+  let guard = 0;
+  let stop = false;
+  do {
+    const args = {
+      boardId: ACTIVITY_LOG_BOARD, includeColumns: true,
+      columnIds: ['date_mm4j4kgn','text_mm4jjjqw','color_mm4jfe68','dropdown_mm4jzxq6'],
+      orderBy: [{ columnId: 'date_mm4j4kgn', direction: 'desc' }],
+      limit: 80
+    };
+    if (cursor) args.cursor = cursor;
+    const r = await window.cowork.callMcpTool(MONDAY, args);
+    if (r && r.isError) {
+      const msg = (r.content && r.content[0] && r.content[0].text) || 'Unknown error';
+      throw new Error(msg);
+    }
+    const data = r.structuredContent ?? JSON.parse(r.content[0].text);
+    const pageItems = data.items || [];
+    for (const it of pageItems){
+      const dateStr = cv(it, 'date_mm4j4kgn');
+      const age = daysAgo(dateStr);
+      if (age !== null && age <= 7) items.push(it);
+      else if (age !== null && age > 7) stop = true; // sorted desc — safe to stop paging once we pass the week window
+    }
+    cursor = (data.pagination && data.pagination.has_more) ? data.pagination.nextCursor : null;
+    guard++;
+  } while (cursor && !stop && guard < 12);
+  return items;
+}
+
+function renderActivityLog(items){
+  document.getElementById('activity-count').textContent = items.length;
+  const repCounts = {};
+  items.forEach(it => {
+    const rep = repLabel(cv(it, 'dropdown_mm4jzxq6'));
+    repCounts[rep] = (repCounts[rep] || 0) + 1;
+  });
+  const stripEl = document.getElementById('activity-rep-strip');
+  const reps = Object.entries(repCounts).sort((a,b) => b[1]-a[1]);
+  stripEl.innerHTML = reps.length
+    ? `<div class="rep-strip">${reps.map(([rep,count]) => `<span class="rep-pill">${esc(rep)} <span class="rep-num">${count}</span></span>`).join('')}</div>`
+    : '';
+
+  const body = document.getElementById('activity-log-body');
+  if (!items.length){
+    body.innerHTML = emptyRow('No sales activity logged in the last 7 days.');
+    return;
+  }
+  const notableAll = items.filter(it => !isGenericTouch(it.name)).sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
+  const notable = notableAll.slice(0, 12);
+  const genericCount = items.length - notableAll.length;
+
+  if (!notable.length){
+    body.innerHTML = emptyRow('This week was routine prospecting touches only — no notable calls, meetings, or deal movement logged.');
+  } else {
+    body.innerHTML = notable.map(it => {
+      const merchant = cv(it, 'text_mm4jjjqw') || '—';
+      const stage = stageLabel(cv(it, 'color_mm4jfe68'));
+      const rep = repLabel(cv(it, 'dropdown_mm4jzxq6'));
+      return `<div class="activity-row">
+        <span class="a-merchant">${esc(merchant)}</span>
+        ${stage ? badge(stage) : ''}
+        <span class="a-note">${esc(it.name)}</span>
+        <span class="a-date">${esc(rep)} · ${fmtDate(cv(it,'date_mm4j4kgn'))}</span>
+      </div>`;
+    }).join('');
+  }
+  if (genericCount > 0){
+    body.insertAdjacentHTML('beforeend',
+      `<div class="activity-footnote">+ ${genericCount} additional routine touches (emails/texts/calls) logged this week, not shown individually.</div>`);
+  }
+}
+
+// ================= PIPELINE COACHING (same board as Pipeline Coaching Dashboard artifact) =================
+function renderCoaching(items){
+  const atRisk = [], weekly = [], monthly = [];
+  items.forEach(it => {
+    const rel = cv(it,'board_relation_mm58emk3');
+    if (Array.isArray(rel) && rel.length){ atRisk.push(it); }
+    else if (/target/i.test(it.name)){ monthly.push(it); }
+    else if (/week of/i.test(it.name)){ weekly.push(it); }
+  });
+
+  const weeklyBody = document.getElementById('weekly-activity-body');
+  weeklyBody.innerHTML = weekly.length ? weekly.map(it => {
+    const rep = cv(it,'dropdown_mm581zx8') || it.name;
+    const logged = num(cv(it,'numeric_mm58rk2n'));
+    const target = num(cv(it,'numeric_mm58hsyk'), 1);
+    const pct = Math.min(100, Math.round((logged/target)*100));
+    const notes = cv(it,'long_text_mm58a678');
+    return `<div class="progress-row">
+      <div class="top"><span class="name">${esc(rep)}</span><span class="nums">${logged} / ${target}</span></div>
+      <div class="bar"><div class="${pct<50?'behind':''}" style="width:${pct}%"></div></div>
+      ${notes ? `<div class="note">${esc(notes)}</div>` : ''}
+    </div>`;
+  }).join('') : emptyRow('No weekly activity snapshot logged.');
+
+  const monthlyBody = document.getElementById('monthly-target-body');
+  monthlyBody.innerHTML = monthly.length ? monthly.map(it => {
+    const rep = cv(it,'dropdown_mm581zx8') || it.name;
+    const closed = num(cv(it,'numeric_mm58rk2n'));
+    const target = num(cv(it,'numeric_mm58hsyk'), 1);
+    const pct = Math.min(100, Math.round((closed/target)*100));
+    const notes = cv(it,'long_text_mm58a678');
+    return `<div class="progress-row">
+      <div class="top"><span class="name">${esc(rep)}</span><span class="nums">${closed} / ${target} closed</span></div>
+      <div class="bar"><div class="${pct<50?'behind':''}" style="width:${pct}%"></div></div>
+      ${notes ? `<div class="note">${esc(notes)}</div>` : ''}
+    </div>`;
+  }).join('') : emptyRow('No monthly deal targets logged.');
+
+  document.getElementById('atrisk-count').textContent = atRisk.length;
+  const atRiskBody = document.getElementById('atrisk-body');
+  if (!atRisk.length){
+    atRiskBody.innerHTML = emptyRow('No deals currently flagged at-risk (45+ days without activity).');
+  } else {
+    const sorted = atRisk.slice().sort((a,b) => (daysAgo(cv(b,'date_mm58e377'))||0) - (daysAgo(cv(a,'date_mm58e377'))||0));
+    const rows = sorted.map(it => {
+      const rep = cv(it,'dropdown_mm581zx8') || '—';
+      const stage = cv(it,'color_mm58gcvd');
+      const terminals = cv(it,'numeric_mm583cbf');
+      const lastActivity = cv(it,'date_mm58e377');
+      const da = daysAgo(lastActivity);
+      const notes = cv(it,'long_text_mm58a678');
+      return `<tr>
+        <td><strong>${esc(it.name)}</strong></td>
+        <td>${esc(rep)}</td>
+        <td>${badge(stage)}</td>
+        <td>${terminals ?? '—'}</td>
+        <td>${lastActivity ? fmtDate(lastActivity) : '—'}</td>
+        <td style="color:${da && da>=45 ? 'var(--red)':'var(--gray-900)'};font-weight:${da && da>=45?'700':'400'};">${da !== null ? da+' days' : '—'}</td>
+        <td>${esc(notes || '—')}</td>
+      </tr>`;
+    }).join('');
+    atRiskBody.innerHTML = `<table><thead><tr>
+      <th>Deal</th><th>Rep</th><th>Stage</th><th>Terminals</th><th>Last Activity</th><th>Days Since</th><th>Notes</th>
+    </tr></thead><tbody>${rows}</tbody></table>`;
+  }
+  return { weekly, monthly, atRisk };
+}
+
+// ================= DEAL APPROVALS (same board as Deal Approval Dashboard artifact) =================
+function renderApprovals(items){
+  document.getElementById('approval-count').textContent = items.length;
+  const body = document.getElementById('approval-body');
+  if (!items.length){
+    body.innerHTML = emptyRow('No deal approval requests logged this week.');
+    return { pending: 0, decidedThisWeek: 0 };
+  }
+  const sorted = items.slice().sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
+  const rows = sorted.map(it => {
+    const status = cv(it,'color_mm5advcz');
+    const stage = cv(it,'color_mm5a91zd');
+    const volume = cv(it,'numeric_mm5ajtyr');
+    const decisionBy = cv(it,'date_mm5aw5rt');
+    const requestedBy = cv(it,'multiple_person_mm5a78ad');
+    const ask = cv(it,'long_text_mm5adfb8');
+    const rec = cv(it,'long_text_mm5apns5');
+    const rel = cv(it,'board_relation_mm5a7en4');
+    const dealName = (Array.isArray(rel) && rel.length) ? rel[0].name : it.name;
+    return `<tr>
+      <td><strong>${esc(dealName)}</strong></td>
+      <td>${badge(status)}</td>
+      <td>${badge(stage)}</td>
+      <td>${volume ? '$'+Number(volume).toLocaleString() : '—'}</td>
+      <td>${decisionBy ? fmtDate(decisionBy) : '—'}</td>
+      <td>${esc(requestedBy || '—')}</td>
+      <td>${esc(ask || rec || '—')}</td>
+    </tr>`;
+  }).join('');
+  body.innerHTML = `<table><thead><tr>
+    <th>Deal</th><th>Approval Status</th><th>Deal Stage</th><th>Est. Monthly Volume</th><th>Decision Needed By</th><th>Requested By</th><th>Ask / Recommendation</th>
+  </tr></thead><tbody>${rows}</tbody></table>`;
+  const pending = items.filter(it => (cv(it,'color_mm5advcz')||'') === 'Pending Review').length;
+  const decidedThisWeek = items.filter(it => withinLastDays(cv(it,'date_mm5a3jd2'), 7)).length;
+  return { pending, decidedThisWeek };
+}
+
+// ================= PROJECT MOVEMENT (static snapshot of Project Tracker artifact) =================
+// Manually confirmed from /Claude/Artifacts/project-tracker/index.html on 2026-07-16.
+// This artifact's data lives in that app's own local storage, not monday.com, so it
+// cannot be pulled live here. Ask Claude to re-read Project Tracker and refresh this
+// section whenever priorities shift.
+const PROJECT_SNAPSHOT = {
+  asOf: '2026-07-16',
+  projects: [
+    {
+      name: 'Sales SOP Rollout',
+      status: 'In Progress',
+      entity: 'Other / Umbrella',
+      desc: 'Standardize and roll out the new sales process SOP across the team.',
+      tasks: [
+        { title: 'Draft sales SOP document', status: 'Done', due: '2026-07-03' },
+        { title: 'Circulate draft for team feedback', status: 'Done', due: '2026-07-07' },
+        { title: 'Incorporate feedback & finalize doc', status: 'In Progress', due: '2026-07-16', movedThisWeek: true },
+        { title: 'Build training deck for team walkthrough', status: 'To Do', due: '2026-07-21' },
+        { title: 'Schedule training session', status: 'To Do', due: '2026-07-24' },
+        { title: 'Publish final SOP to shared drive', status: 'To Do', due: '2026-07-25' },
+        { title: 'Collect adoption feedback (30-day check-in)', status: 'To Do', due: '2026-08-24' },
+      ]
+    },
+    {
+      name: 'SALT Merchant Referral Pilot',
+      status: 'Not Started (Phase 0 In Progress)',
+      entity: 'SALT (Payments)',
+      desc: 'Controlled pilot rewarding referral partners for warm merchant introductions with finite, milestone-based payments. $60,250 pilot cap · up to $13,000 max per referral · 90-day measured window.',
+      phases: [
+        {
+          name: 'Pre-Launch: Cross-Functional Setup',
+          status: 'In Progress',
+          note: 'In progress as of the 7/15 cross-functional alignment call — a follow-up call is still needed before launch.',
+          movedThisWeek: true,
+          tasks: [
+            { title: 'Finalize & document payout methodology (tiers, thresholds, calc rules)', status: 'In Progress', assignee: 'Rev&A', priority: 'P0', note: 'On the 7/15 call the per-referral cap was read aloud as "$30,000" — likely a transcription slip for $13,000 per source docs. Worth a quick confirm with Rev&A before this is finalized.' },
+            { title: "Define 'qualified net-new lead' and 'dormant' standards", status: 'To Do', assignee: 'Sales', priority: 'P0' },
+            { title: 'Draft & get Legal approval on referral partner agreement template', status: 'To Do', assignee: 'Legal', priority: 'P0', note: 'Blocks all of Phase A onboarding.' },
+          ]
+        },
+        { name: 'Phase A — Partner Onboarding', status: 'Not Started' },
+        { name: 'Phase B — Referral & First Payment ($50/$100)', status: 'Not Started' },
+        { name: 'Phase C — Signing Bonus ($250)', status: 'Not Started' },
+        { name: 'Phase D — 90-Day Volume Kicker (up to $12.7K)', status: 'Not Started' },
+        { name: 'Ongoing Controls, Reporting & Exceptions', status: 'Not Started' },
+        { name: 'Pilot Evaluation & Go/No-Go Decision', status: 'Not Started' },
+      ]
+    }
+  ],
+  otherInitiatives: [
+    'Alleaves POS CRM Due Diligence & Procurement (Reevo / Attio / Copper evaluation)',
+    'SEO Rollout — 90-Day Program'
+  ]
+};
+
+function renderProjectSnapshot(){
+  document.getElementById('proj-snapshot-date').textContent = fmtDate(PROJECT_SNAPSHOT.asOf);
+  const movedCount = PROJECT_SNAPSHOT.projects.reduce((sum, p) => {
+    let c = 0;
+    (p.tasks||[]).forEach(t => { if (t.movedThisWeek) c++; });
+    (p.phases||[]).forEach(ph => {
+      if (ph.movedThisWeek) c++;
+      (ph.tasks||[]).forEach(t => { if (t.movedThisWeek) c++; });
+    });
+    return sum + c;
+  }, 0);
+  document.getElementById('proj-count').textContent = movedCount;
+
+  const projectHtml = PROJECT_SNAPSHOT.projects.map(p => {
+    let phasesHtml = '';
+    if (p.tasks){
+      phasesHtml += p.tasks.map(t => `
+        <div class="task-line">
+          <span class="task-title">${esc(t.title)}${t.movedThisWeek ? '<span class="flag">🌈 MOVED THIS WEEK</span>' : ''}</span>
+          ${badge(t.status)}
+          <span class="task-meta">due ${fmtDate(t.due)}</span>
+        </div>`).join('');
+    }
+    if (p.phases){
+      phasesHtml += p.phases.map(ph => {
+        const taskLines = (ph.tasks||[]).map(t => `
+          <div class="task-line">
+            <span class="task-title">${esc(t.title)}</span>
+            ${badge(t.status)}
+            ${t.priority ? badge(t.priority, 'badge priority-'+slug(t.priority)) : ''}
+            ${t.assignee ? `<span class="task-meta">${esc(t.assignee)}</span>` : ''}
+            ${t.note ? `<div class="note-callout" style="width:100%;">${esc(t.note)}</div>` : ''}
+          </div>`).join('');
+        return `<div class="phase-row">
+          <div class="phase-title">${esc(ph.name)}${ph.movedThisWeek ? '<span class="flag">🌈 MOVED THIS WEEK</span>' : ''} ${badge(ph.status)}</div>
+          ${ph.note ? `<div class="phase-desc">${esc(ph.note)}</div>` : ''}
+          ${taskLines}
+        </div>`;
+      }).join('');
+    }
+    return `<div class="proj-card">
+      <h3>${esc(p.name)} ${badge(p.status)} <span class="type-pill">${esc(p.entity)}</span></h3>
+      <div class="proj-desc">${esc(p.desc)}</div>
+      ${phasesHtml}
+    </div>`;
+  }).join('');
+
+  const otherHtml = PROJECT_SNAPSHOT.otherInitiatives.length
+    ? `<div class="other-init">Also active in Project Tracker but not detailed here — confirm current phase before including: ${PROJECT_SNAPSHOT.otherInitiatives.map(esc).join(' · ')}</div>`
+    : '';
+
+  document.getElementById('proj-card-wrap').innerHTML = projectHtml + otherHtml;
+}
+
+// ---------- KPI strip ----------
+function renderKpis({ visitsCount, needsFollowUpCount, activityCount, weekly, monthly, atRiskCount, projMovedCount }){
+  const loggedSum = weekly.reduce((s,it) => s + num(cv(it,'numeric_mm58rk2n')), 0);
+  const targetSum = weekly.reduce((s,it) => s + num(cv(it,'numeric_mm58hsyk')), 0);
+  const closedSum = monthly.reduce((s,it) => s + num(cv(it,'numeric_mm58rk2n')), 0);
+  const monthlyTargetSum = monthly.reduce((s,it) => s + num(cv(it,'numeric_mm58hsyk')), 0);
+
+  const kpis = [
+    { label: '🏗️ Projects Moved This Week', value: projMovedCount, foot: 'Static snapshot' },
+    { label: '📋 Field Reports Logged', value: visitsCount, foot: 'This week' },
+    { label: '📌 Needs Follow-Up', value: needsFollowUpCount, foot: 'From field reports', warn: needsFollowUpCount > 0 },
+    { label: '📞 Sales Touches Logged', value: activityCount, foot: 'Calls · texts · emails', },
+    { label: '🎯 Team Activity vs. Target', value: `${loggedSum} / ${targetSum}`, foot: 'Weekly rep activity' },
+    { label: '🤝 Deals Closed vs. July Target', value: `${closedSum} / ${monthlyTargetSum}`, foot: 'Phil + Krysta combined' },
+    { label: '⚠️ At-Risk Deals', value: atRiskCount, foot: '45+ days no activity', warn: atRiskCount > 0 }
+  ];
+  document.getElementById('kpi-row').innerHTML = kpis.map(k => `
+    <div class="kpi">
+      <div class="label">${esc(k.label)}</div>
+      <div class="value${k.warn ? ' warn':''}">${esc(k.value)}</div>
+      <div class="foot">${esc(k.foot)}</div>
+    </div>`).join('');
+}
+
+// ---------- 10,000-foot cloud view (neutral, matter-of-fact — same numbers as the sections below) ----------
+function renderCloudView({ visitsCount, needsFollowUpCount, activityCount, monthly, atRiskCount, projMovedCount, pendingApprovals, decidedThisWeek }){
+  const closedSum = monthly.reduce((s,it) => s + num(cv(it,'numeric_mm58rk2n')), 0);
+  const monthlyTargetSum = monthly.reduce((s,it) => s + num(cv(it,'numeric_mm58hsyk')), 0);
+
+  const items = [
+    { emoji: '☁️', html: `Field reports: <strong>${visitsCount}</strong> logged this week, <strong>${needsFollowUpCount}</strong> flagged for follow-up.` },
+    { emoji: '🌤️', html: `Sales activity: <strong>${activityCount}</strong> calls, texts &amp; emails logged this week.` },
+    { emoji: '⛅', html: `Deal approvals: <strong>${pendingApprovals}</strong> pending review, <strong>${decidedThisWeek}</strong> decided this week.` },
+    { emoji: '🌥️', html: `Deals closed: <strong>${closedSum}</strong> of <strong>${monthlyTargetSum}</strong> against the July target.` },
+    { emoji: '🌦️', html: `At-risk deals: <strong>${atRiskCount}</strong> flagged (45+ days without activity).` },
+    { emoji: '🌈', html: `Project movement: <strong>${projMovedCount}</strong> workstream update(s) logged this week.` },
+  ];
+  document.getElementById('cloud-summary').innerHTML = `<div class="sky-grid">${items.map(i => `
+    <div class="sky-item"><span class="sky-emoji">${i.emoji}</span><span class="sky-text">${i.html}</span></div>`).join('')}</div>`;
+}
+
+// ---------- Main ----------
+async function main(){
+  renderWeekRange();
+  renderProjectSnapshot();
+
+  const errors = [];
+  let fieldRecords = [];
+  let pipelineItems = [];
+  let approvalItems = [];
+  let activityItems = [];
+
+  const [fieldResults, pipelineResult, approvalResult, activityResult] = await Promise.all([
+    Promise.all(FIELD_BOARDS.map(async b => {
+      try {
+        const items = await fetchAllItems(b.id);
+        return items.map(it => buildFieldRecord(b.type, it));
+      } catch (e) {
+        console.error('Failed to load field board', b.id, e);
+        errors.push(`${b.type}: ${e.message}`);
+        return [];
+      }
+    })).then(arr => arr.flat()),
+    fetchAllItems(18422024457).catch(e => { console.error(e); errors.push('Pipeline Coaching: '+e.message); return []; }),
+    fetchAllItems(18422380507).catch(e => { console.error(e); errors.push('Deal Approvals: '+e.message); return []; }),
+    fetchActivityLogThisWeek().catch(e => { console.error(e); errors.push('Sales Activity Log: '+e.message); return []; })
+  ]);
+
+  fieldRecords = fieldResults;
+  pipelineItems = pipelineResult;
+  approvalItems = approvalResult;
+  activityItems = activityResult;
+
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('content').style.display = 'block';
+
+  if (errors.length){
+    document.getElementById('content').insertAdjacentHTML('afterbegin',
+      `<div class="err-banner">Some data sources failed to load: ${esc(errors.join(' · '))}</div>`);
+  }
+
+  const visitsThisWeek = renderVisits(fieldRecords);
+  renderActivityLog(activityItems);
+  const coach = renderCoaching(pipelineItems);
+  const approvals = renderApprovals(approvalItems);
+
+  const projMovedCount = parseInt(document.getElementById('proj-count').textContent, 10) || 0;
+  const needsFollowUpCount = visitsThisWeek.filter(r => r.needsFollowUp).length;
+
+  const cloudAndKpiArgs = {
+    visitsCount: visitsThisWeek.length,
+    needsFollowUpCount,
+    activityCount: activityItems.length,
+    weekly: coach.weekly,
+    monthly: coach.monthly,
+    atRiskCount: coach.atRisk.length,
+    projMovedCount,
+    pendingApprovals: approvals.pending,
+    decidedThisWeek: approvals.decidedThisWeek
+  };
+  renderCloudView(cloudAndKpiArgs);
+  renderKpis(cloudAndKpiArgs);
+
+  console.log('Weekly exec brief rendered', {
+    fieldRecords: fieldRecords.length,
+    pipelineItems: pipelineItems.length,
+    approvalItems: approvalItems.length,
+    activityItems: activityItems.length
+  });
+}
+
+main().catch(e => {
+  console.error('Fatal error rendering brief', e);
+  document.getElementById('loading').innerHTML =
+    `<div class="err-banner">Failed to load this week's data: ${esc(e.message)}</div>`;
+});
+</script>
+</body>
+</html>
