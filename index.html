@@ -204,7 +204,11 @@
     margin: 0 0 5px; font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 17px;
     color: var(--navy); display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
   }
-  .proj-card .proj-desc { font-size: 12px; color: var(--gray-500); margin-bottom: 12px; }
+  .proj-card .proj-desc { font-size: 12px; color: var(--gray-500); margin-bottom: 8px; }
+  .proj-card .proj-counts { font-size: 11.5px; color: var(--gray-700); font-weight: 600; margin-bottom: 10px; }
+  .phase-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .phase-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--gray-900);
+    background: var(--gray-100); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; }
   .phase-row { border-top: 1px dashed var(--gray-200); padding: 10px 0; }
   .phase-row:first-of-type { border-top: none; }
   .phase-row .phase-title { font-weight: 700; font-size: 12.5px; color: var(--gray-900); display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
@@ -260,7 +264,7 @@
   <header class="brief-header">
     <div>
       <h1>☁️ SALT Money — Weekly Executive Brief</h1>
-      <div class="sub" id="week-range">🌤️ Week of Jul 12 – Jul 18, 2026 · generated Jul 18, 9:44 AM</div>
+      <div class="sub" id="week-range">🌤️ Week of Jul 18 – Jul 24, 2026 · generated Jul 24, 1:03 PM</div>
     </div>
     <div class="header-actions">
       <button class="btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
@@ -277,33 +281,33 @@
         <span class="desc">A plain-numbers look across every section below — reported straight, no spin either way</span>
       </div>
       <div class="card cloud-card" id="cloud-summary"><div class="sky-grid">
-    <div class="sky-item"><span class="sky-emoji">☁️</span><span class="sky-text">Field reports: <strong>4</strong> logged this week, <strong>4</strong> flagged for follow-up.</span></div>
-    <div class="sky-item"><span class="sky-emoji">🌤️</span><span class="sky-text">Sales activity: <strong>58</strong> calls, texts &amp; emails logged this week.</span></div>
+    <div class="sky-item"><span class="sky-emoji">☁️</span><span class="sky-text">Field reports: <strong>5</strong> logged this week, <strong>5</strong> flagged for follow-up.</span></div>
+    <div class="sky-item"><span class="sky-emoji">🌤️</span><span class="sky-text">Sales activity: <strong>40</strong> calls, texts &amp; emails logged this week.</span></div>
     <div class="sky-item"><span class="sky-emoji">⛅</span><span class="sky-text">Deal approvals: <strong>0</strong> pending review, <strong>0</strong> decided this week.</span></div>
     <div class="sky-item"><span class="sky-emoji">🌥️</span><span class="sky-text">Deals closed: <strong>1</strong> of <strong>4</strong> against the July target.</span></div>
     <div class="sky-item"><span class="sky-emoji">🌦️</span><span class="sky-text">At-risk deals: <strong>29</strong> flagged (45+ days without activity).</span></div>
-    <div class="sky-item"><span class="sky-emoji">🌈</span><span class="sky-text">Project movement: <strong>2</strong> workstream update(s) logged this week.</span></div></div></div>
+    <div class="sky-item"><span class="sky-emoji">🌈</span><span class="sky-text">Project movement: <strong>30</strong> workstream update(s) logged this week.</span></div></div></div>
     </section>
 
     <div class="kpi-row" id="kpi-row">
     <div class="kpi">
       <div class="label">🏗️ Projects Moved This Week</div>
-      <div class="value">2</div>
+      <div class="value">30</div>
       <div class="foot">Static snapshot</div>
     </div>
     <div class="kpi">
       <div class="label">📋 Field Reports Logged</div>
-      <div class="value">4</div>
+      <div class="value">5</div>
       <div class="foot">This week</div>
     </div>
     <div class="kpi">
       <div class="label">📌 Needs Follow-Up</div>
-      <div class="value warn">4</div>
+      <div class="value warn">5</div>
       <div class="foot">From field reports</div>
     </div>
     <div class="kpi">
       <div class="label">📞 Sales Touches Logged</div>
-      <div class="value">58</div>
+      <div class="value">40</div>
       <div class="foot">Calls · texts · emails</div>
     </div>
     <div class="kpi">
@@ -324,261 +328,219 @@
 
     <section class="block">
       <div class="block-head">
-        <h2>🏗️ Project Movement <span class="count-pill" id="proj-count">2</span><span class="snapshot-tag">Static snapshot — ask Claude to refresh</span></h2>
-        <span class="desc">Manually confirmed from the Project Tracker artifact (locally stored, not on monday.com) as of <span id="proj-snapshot-date">Jul 16, 2026</span></span>
+        <h2>🏗️ Project Movement <span class="count-pill" id="proj-count">30</span><span class="snapshot-tag">Synced snapshot — ask Claude to refresh</span></h2>
+        <span class="desc">Synced from the Project Tracker artifact (locally stored, not on monday.com) as of <span id="proj-snapshot-date">Jul 24, 2026</span></span>
       </div>
       <div class="card" id="proj-card-wrap"><div class="proj-card">
-      <h3>Sales SOP Rollout <span class="badge status-in-progress">⏳ In Progress</span> <span class="type-pill">Other / Umbrella</span></h3>
+      <h3>Hire: BDR — Alleaves <span class="badge status-in-progress">⏳ In Progress</span> <span class="type-pill">Alleaves (POS)</span><span class="flag">🌈 13 moved this week</span></h3>
+      <div class="proj-desc">End-to-end workflow for hiring Alleaves' next BDR — requisition through 90-day ramp.</div>
+      <div class="proj-counts">30 tasks · 2 in progress · 28 to do</div>
+      <div class="phase-chips"><span class="phase-chip">Define &amp; Approve Role <span class="badge status-done">✅ Done</span><span class="flag">🌈</span></span><span class="phase-chip">Source &amp; Screen <span class="badge status-done">✅ Done</span><span class="flag">🌈</span></span><span class="phase-chip">Interview &amp; Select <span class="badge status-not-started">📝 Not Started</span><span class="flag">🌈</span></span><span class="phase-chip">Dry Dock Prep — Before Day 1 <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Onboarding &amp; Ramp — First 90 Days <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Post-Ramp — What's Next <span class="badge status-not-started">📝 Not Started</span></span></div><div class="phase-desc">Biggest mover this week — role defined and approved, candidates sourced &amp; screened; now moving into interviews.</div>
+    </div><div class="proj-card">
+      <h3>Hire: Director of Sales — Alleaves <span class="badge status-in-progress">⏳ In Progress</span> <span class="type-pill">Alleaves (POS)</span><span class="flag">🌈 9 moved this week</span></h3>
+      <div class="proj-desc">End-to-end workflow for hiring Alleaves' Director of Sales — role definition through strategic ramp.</div>
+      <div class="proj-counts">28 tasks · 2 in progress · 26 to do</div>
+      <div class="phase-chips"><span class="phase-chip">Define &amp; Align <span class="badge status-done">✅ Done</span><span class="flag">🌈</span></span><span class="phase-chip">Source &amp; Screen <span class="badge status-not-started">📝 Not Started</span><span class="flag">🌈</span></span><span class="phase-chip">Interview &amp; Select <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Dry Dock Prep — Before Day 1 <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Onboarding &amp; Strategic Ramp <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Post-Ramp — What's Next <span class="badge status-not-started">📝 Not Started</span></span></div><div class="phase-desc">Role scope, comp package (exec-approved) and JD all done; now in confidential outreach and initial screens for leadership candidates.</div>
+    </div><div class="proj-card">
+      <h3>Sales SOP Rollout <span class="badge status-in-progress">⏳ In Progress</span> <span class="type-pill">SALT (Payments)</span><span class="flag">🌈 3 moved this week</span></h3>
       <div class="proj-desc">Standardize and roll out the new sales process SOP across the team.</div>
+      <div class="proj-counts">8 tasks · 8 to do</div>
       
         <div class="task-line">
-          <span class="task-title">Draft sales SOP document</span>
+          <span class="task-title">Schedule training session<span class="flag">🌈 MOVED THIS WEEK</span></span>
           <span class="badge status-done">✅ Done</span>
-          <span class="task-meta">due Jul 3, 2026</span>
         </div>
         <div class="task-line">
-          <span class="task-title">Circulate draft for team feedback</span>
-          <span class="badge status-done">✅ Done</span>
-          <span class="task-meta">due Jul 7, 2026</span>
-        </div>
-        <div class="task-line">
-          <span class="task-title">Incorporate feedback &amp; finalize doc<span class="flag">🌈 MOVED THIS WEEK</span></span>
-          <span class="badge status-in-progress">⏳ In Progress</span>
-          <span class="task-meta">due Jul 16, 2026</span>
-        </div>
-        <div class="task-line">
-          <span class="task-title">Build training deck for team walkthrough</span>
+          <span class="task-title">Build training deck for team walkthrough<span class="flag">🌈 MOVED THIS WEEK</span></span>
           <span class="badge status-to-do">📝 To Do</span>
-          <span class="task-meta">due Jul 21, 2026</span>
         </div>
         <div class="task-line">
-          <span class="task-title">Schedule training session</span>
+          <span class="task-title">Publish final SOP to shared drive<span class="flag">🌈 MOVED THIS WEEK</span></span>
           <span class="badge status-to-do">📝 To Do</span>
-          <span class="task-meta">due Jul 24, 2026</span>
-        </div>
-        <div class="task-line">
-          <span class="task-title">Publish final SOP to shared drive</span>
-          <span class="badge status-to-do">📝 To Do</span>
-          <span class="task-meta">due Jul 25, 2026</span>
-        </div>
-        <div class="task-line">
-          <span class="task-title">Collect adoption feedback (30-day check-in)</span>
-          <span class="badge status-to-do">📝 To Do</span>
-          <span class="task-meta">due Aug 24, 2026</span>
         </div>
     </div><div class="proj-card">
-      <h3>SALT Merchant Referral Pilot <span class="badge status-not-started-phase-0-in-progress">⏳ Not Started (Phase 0 In Progress)</span> <span class="type-pill">SALT (Payments)</span></h3>
-      <div class="proj-desc">Controlled pilot rewarding referral partners for warm merchant introductions with finite, milestone-based payments. $60,250 pilot cap · up to $13,000 max per referral · 90-day measured window.</div>
-      <div class="phase-row">
-          <div class="phase-title">Pre-Launch: Cross-Functional Setup<span class="flag">🌈 MOVED THIS WEEK</span> <span class="badge status-in-progress">⏳ In Progress</span></div>
-          <div class="phase-desc">In progress as of the 7/15 cross-functional alignment call — a follow-up call is still needed before launch.</div>
-          
-          <div class="task-line">
-            <span class="task-title">Finalize &amp; document payout methodology (tiers, thresholds, calc rules)</span>
-            <span class="badge status-in-progress">⏳ In Progress</span>
-            <span class="badge badge priority-p0">P0</span>
-            <span class="task-meta">Rev&amp;A</span>
-            <div class="note-callout" style="width:100%;">On the 7/15 call the per-referral cap was read aloud as "$30,000" — likely a transcription slip for $13,000 per source docs. Worth a quick confirm with Rev&amp;A before this is finalized.</div>
-          </div>
-          <div class="task-line">
-            <span class="task-title">Define 'qualified net-new lead' and 'dormant' standards</span>
-            <span class="badge status-to-do">📝 To Do</span>
-            <span class="badge badge priority-p0">P0</span>
-            <span class="task-meta">Sales</span>
-            
-          </div>
-          <div class="task-line">
-            <span class="task-title">Draft &amp; get Legal approval on referral partner agreement template</span>
-            <span class="badge status-to-do">📝 To Do</span>
-            <span class="badge badge priority-p0">P0</span>
-            <span class="task-meta">Legal</span>
-            <div class="note-callout" style="width:100%;">Blocks all of Phase A onboarding.</div>
-          </div>
-        </div><div class="phase-row">
-          <div class="phase-title">Phase A — Partner Onboarding <span class="badge status-not-started">📝 Not Started</span></div>
-          
-          
-        </div><div class="phase-row">
-          <div class="phase-title">Phase B — Referral &amp; First Payment ($50/$100) <span class="badge status-not-started">📝 Not Started</span></div>
-          
-          
-        </div><div class="phase-row">
-          <div class="phase-title">Phase C — Signing Bonus ($250) <span class="badge status-not-started">📝 Not Started</span></div>
-          
-          
-        </div><div class="phase-row">
-          <div class="phase-title">Phase D — 90-Day Volume Kicker (up to $12.7K) <span class="badge status-not-started">📝 Not Started</span></div>
-          
-          
-        </div><div class="phase-row">
-          <div class="phase-title">Ongoing Controls, Reporting &amp; Exceptions <span class="badge status-not-started">📝 Not Started</span></div>
-          
-          
-        </div><div class="phase-row">
-          <div class="phase-title">Pilot Evaluation &amp; Go/No-Go Decision <span class="badge status-not-started">📝 Not Started</span></div>
-          
-          
+      <h3>Deal Follow Ups <span class="badge status-in-progress">⏳ In Progress</span> <span class="type-pill">SALT (Payments)</span><span class="flag">🌈 3 moved this week</span></h3>
+      <div class="proj-desc">Ongoing items to work deals with or for the team.</div>
+      <div class="proj-counts">3 tasks · 3 in progress</div>
+      
+        <div class="task-line">
+          <span class="task-title">East Coast Cannabis — Maine<span class="flag">🌈 MOVED THIS WEEK</span></span>
+          <span class="badge status-in-progress">⏳ In Progress</span>
         </div>
-    </div><div class="other-init">Also active in Project Tracker but not detailed here — confirm current phase before including: Alleaves POS CRM Due Diligence &amp; Procurement (Reevo / Attio / Copper evaluation) · SEO Rollout — 90-Day Program</div></div>
+        <div class="task-line">
+          <span class="task-title">MHW<span class="flag">🌈 MOVED THIS WEEK</span></span>
+          <span class="badge status-in-progress">⏳ In Progress</span>
+        </div>
+        <div class="task-line">
+          <span class="task-title">Cake House Santa Rosa<span class="flag">🌈 MOVED THIS WEEK</span></span>
+          <span class="badge status-in-progress">⏳ In Progress</span>
+        </div>
+    </div><div class="proj-card">
+      <h3>SALT Merchant Referral Pilot <span class="badge status-in-progress">⏳ In Progress</span> <span class="type-pill">SALT (Payments)</span><span class="flag">🌈 2 moved this week</span></h3>
+      <div class="proj-desc">Controlled pilot rewarding referral partners for warm merchant introductions with finite, milestone-based payments. $60,250 pilot cap · up to $13,000 max per referral · 90-day measured window.</div>
+      <div class="proj-counts">41 tasks · 6 in progress · 35 to do</div>
+      <div class="phase-chips"><span class="phase-chip">Pre-Launch: Cross-Functional Setup <span class="badge status-not-started">📝 Not Started</span><span class="flag">🌈</span></span><span class="phase-chip">Phase A — Partner Onboarding <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Phase B — Referral &amp; First Payment ($50/$100) <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Phase C — Signing Bonus ($250) <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Phase D — 90-Day Volume Kicker (up to $12.7K) <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Ongoing Controls, Reporting &amp; Exceptions <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Pilot Evaluation &amp; Go/No-Go Decision <span class="badge status-not-started">📝 Not Started</span></span></div><div class="phase-desc">Moved this week: standing up the GTM/Ops referral tracker (system of record).</div>
+    </div><div class="proj-card">
+      <h3>Alleaves POS CRM Diligence &amp; Procurement <span class="badge status-in-progress">⏳ In Progress</span> <span class="type-pill">Alleaves (POS)</span></h3>
+      <div class="proj-desc">Evaluating CRM options for sales &amp; CS across Alleaves POS and other portfolio companies (Reevo / Attio / Copper).</div>
+      <div class="proj-counts">31 tasks · 2 in progress · 29 to do</div>
+      <div class="phase-chips"><span class="phase-chip">Framework &amp; Shortlist Setup <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Reevo Evaluation <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Attio Evaluation <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Copper Evaluation <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Comparison &amp; Decision <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Procurement &amp; Migration <span class="badge status-not-started">📝 Not Started</span></span></div>
+    </div><div class="proj-card">
+      <h3>SEO Rollout — 90-Day Program <span class="badge status-in-progress">⏳ In Progress</span> <span class="type-pill">SALT (Payments)</span></h3>
+      <div class="proj-desc">Phased 90-day SEO rollout: baseline &amp; quick wins, funnel build-out, proof &amp; reporting, and ongoing cadence.</div>
+      <div class="proj-counts">45 tasks · 45 to do</div>
+      <div class="phase-chips"><span class="phase-chip">Days 1–30: Baseline &amp; Quick Wins <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Days 31–60: Build the Funnel <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Days 61–90: Proof &amp; Reporting <span class="badge status-not-started">📝 Not Started</span></span><span class="phase-chip">Ongoing Cadence <span class="badge status-not-started">📝 Not Started</span></span></div>
+    </div><div class="other-init">Synced live from Project Tracker on Jul 24, 2026 · 7 active workstreams · ~186 open tasks · 30 items moved this week.</div></div>
     </section>
 
     <section class="block">
       <div class="block-head">
-        <h2>🚗 In-Market Sales Activity <span class="count-pill" id="visit-count">4</span></h2>
+        <h2>🚗 In-Market Sales Activity <span class="count-pill" id="visit-count">5</span></h2>
         <span class="desc">Field reports logged this week — Store Visit Expense, Event Recap &amp; In-Market Visit logs</span>
       </div>
       <div class="card"><div id="visit-body"><div class="visit-grid">
     <div class="visit-card">
-      <h3>Krysta Jones<span class="flag">📌 NEEDS FOLLOW-UP</span></h3>
-      <div class="meta"><span class="type-pill">In-Market Visit</span> NY · Jul 15, 2026 · 4/5 opportunity</div>
+      <h3>Krysta Jones<span class="flag" style="background:var(--red);">🚩 FLAG FOR LEADERSHIP</span></h3>
+      <div class="meta"><span class="type-pill">In-Market Visit</span> NJ · Jul 22, 2026 · 5/5 opportunity</div>
       <dl>
         <dt>Purpose</dt><dd>Relationship Building</dd>
-        <dt>Opportunity / deal impact</dt><dd>sanja connected me with dan directly already and am trying to compare our products to his current system while in town</dd>
+        <dt>Opportunity / deal impact</dt><dd>need to follow up asap, family owned hoping to close quicker, they do community events and other things in public that we could build and support</dd>
+        <dt>Next step</dt><dd>follow up with budtender 
+follow up with GM 
+Get a hold of Steve  &amp; Nic owners</dd>
+        <dt>Leadership alert</dt><dd style="color:var(--red);font-weight:600;">NJ seems to lack tap and reliability so far</dd>
+      </dl>
+    </div>
+    <div class="visit-card">
+      <h3>Krysta Jones<span class="flag" style="background:var(--red);">🚩 FLAG FOR LEADERSHIP</span></h3>
+      <div class="meta"><span class="type-pill">In-Market Visit</span> NY · Jul 20, 2026 · 5/5 opportunity</div>
+      <dl>
+        <dt>Purpose</dt><dd>Other</dd>
+        <dt>Opportunity / deal impact</dt><dd>—</dd>
         <dt>Next step</dt><dd>text
-email deal 
-close</dd>
-        
+email
+close and comback to activate and support transactions</dd>
+        <dt>Leadership alert</dt><dd style="color:var(--red);font-weight:600;">they are super involved with the community and events in NY great future partner for this</dd>
       </dl>
     </div>
     <div class="visit-card">
-      <h3>krysta<span class="flag">📌 NEEDS FOLLOW-UP</span></h3>
-      <div class="meta"><span class="type-pill">In-Market Visit</span> ny · Jul 15, 2026 · 3/5 opportunity</div>
+      <h3>krysta jones<span class="flag" style="background:var(--red);">🚩 FLAG FOR LEADERSHIP</span></h3>
+      <div class="meta"><span class="type-pill">In-Market Visit</span> NY · Jul 17, 2026 · 3/5 opportunity</div>
       <dl>
         <dt>Purpose</dt><dd>Relationship Building</dd>
-        <dt>Opportunity / deal impact</dt><dd>yes immediate follow up to compete</dd>
-        <dt>Next step</dt><dd>text for info 
-email 
-follow up</dd>
-        
+        <dt>Opportunity / deal impact</dt><dd>I gave card as a resource</dd>
+        <dt>Next step</dt><dd>email 
+call and talk to upper level 
+in person next trip with upper management</dd>
+        <dt>Leadership alert</dt><dd style="color:var(--red);font-weight:600;">they are using cc</dd>
+      </dl>
+    </div>
+    <div class="visit-card">
+      <h3>Krysta Jones<span class="flag" style="background:var(--red);">🚩 FLAG FOR LEADERSHIP</span></h3>
+      <div class="meta"><span class="type-pill">In-Market Visit</span> NY · Jul 17, 2026 · 5/5 opportunity</div>
+      <dl>
+        <dt>Purpose</dt><dd>Relationship Building</dd>
+        <dt>Opportunity / deal impact</dt><dd>email immediately waiting for response to sit down with the owner</dd>
+        <dt>Next step</dt><dd>emailed 
+will call if I dont hear back soon 
+in person next</dd>
+        <dt>Leadership alert</dt><dd style="color:var(--red);font-weight:600;">they are cash only</dd>
       </dl>
     </div>
     <div class="visit-card">
       <h3>Krysta Jones<span class="flag">📌 NEEDS FOLLOW-UP</span></h3>
-      <div class="meta"><span class="type-pill">Event Recap</span> NY · Jul 15, 2026 · 5/5 quality · 8 qualified leads</div>
+      <div class="meta"><span class="type-pill">Event Recap</span> NY · Jul 17, 2026 · 5/5 quality · 2 qualified leads</div>
       <dl>
-        <dt>Event</dt><dd>WOW Wyld  x Gron industry event</dd>
-        <dt>Biggest opportunity / risk</dt><dd>recoup Nuna Harvest 
-attend Aug 13th event, possibly sponsor</dd>
-        <dt>Next step</dt><dd>Nuna Harvest
-dispensaries 
-The Other for (Aug 13th Disp focus event )</dd>
-        
-      </dl>
-    </div>
-    <div class="visit-card">
-      <h3>mk test<span class="flag">📌 NEEDS FOLLOW-UP</span></h3>
-      <div class="meta"><span class="type-pill">Store Visit</span> FL · Jul 10, 2026 · $22 expensed</div>
-      <dl>
-        <dt>Visit reason</dt><dd>It was to close a deal</dd>
-        <dt>Opportunity / deal impact</dt><dd>Their provider was down</dd>
-        <dt>Next step</dt><dd>test test test</dd>
+        <dt>Event</dt><dd>Third Thurs</dd>
+        <dt>Biggest opportunity / risk</dt><dd>John, and risk ... not building report and just asking for sales is the risk</dd>
+        <dt>Next step</dt><dd>John 
+His Partner 
+media girl with dispo access</dd>
         
       </dl>
     </div></div></div></div>
 
       <div class="card" style="margin-top:16px;">
         <div class="subhead" style="display:flex;align-items:baseline;justify-content:space-between;padding-right:16px;">
-          <span>📞 Team Sales Activity Log <span class="count-pill" id="activity-count">58</span></span>
+          <span>📞 Team Sales Activity Log <span class="count-pill" id="activity-count">40</span></span>
           <span class="desc" style="font-size:11px;">Calls, texts &amp; emails — Sales Activity Log</span>
         </div>
-        <div id="activity-rep-strip"><div class="rep-strip"><span class="rep-pill">Krysta Jones <span class="rep-num">43</span></span><span class="rep-pill">Unassigned <span class="rep-num">12</span></span><span class="rep-pill">Phil Margolin <span class="rep-num">3</span></span></div></div>
+        <div id="activity-rep-strip"><div class="rep-strip"><span class="rep-pill">Krysta Jones <span class="rep-num">38</span></span><span class="rep-pill">Unassigned <span class="rep-num">1</span></span><span class="rep-pill">Mikaela McLaughlin <span class="rep-num">1</span></span></div></div>
         <div id="activity-log-body"><div class="activity-row">
-        <span class="a-merchant">Conbud - Yankee Stadium</span>
+        <span class="a-merchant">Memes Danckk World</span>
         <span class="badge status-contacted">📞 CONTACTED</span>
-        <span class="a-note">invited to bbq friday by chef going to stop by in person</span>
-        <span class="a-date">Krysta Jones · Jul 16, 2026</span>
+        <span class="a-note">working on submissions and also got her connected to Rain at all leaves and working on talking to Dave for ATM .</span>
+        <span class="a-date">Krysta Jones · Jul 24, 2026</span>
       </div><div class="activity-row">
-        <span class="a-merchant">The Flowery - West Village</span>
-        <span class="badge status-contacted">📞 CONTACTED</span>
-        <span class="a-note">Sanja intro to John the owner</span>
-        <span class="a-date">Krysta Jones · Jul 16, 2026</span>
-      </div><div class="activity-row">
-        <span class="a-merchant">The Flowery - Soho</span>
-        <span class="badge status-contacted">📞 CONTACTED</span>
-        <span class="a-note">sanja connected me directly with Berkay</span>
-        <span class="a-date">Krysta Jones · Jul 16, 2026</span>
-      </div><div class="activity-row">
-        <span class="a-merchant">The Flowery - Soho</span>
-        <span class="badge status-contacted">📞 CONTACTED</span>
-        <span class="a-note">I stopped by Flowery Soho with Sanja yesterday to catch the owner, Berkay, in person. He mentioned he just signed up with Paybotic, so I pitched him on our reliability and being a backup resource, the idea being that if Paybotic goes down, he can swi</span>
-        <span class="a-date">Krysta Jones · Jul 16, 2026</span>
-      </div><div class="activity-row">
-        <span class="a-merchant">Beleaf - Brooklyn</span>
-        <span class="badge status-lead">Lead</span>
-        <span class="a-note">347-262-9843 mikey is the manager. talk with him gave card hes passing to higher up. they have 2 atms branded inside and ctam charge 3.50 open to us being a back up and or competitive.</span>
-        <span class="a-date">Unassigned · Jul 15, 2026</span>
-      </div><div class="activity-row">
-        <span class="a-merchant">The Center</span>
-        <span class="badge status-lead">Lead</span>
-        <span class="a-note">interested in MCA
+        <span class="a-merchant">Denver Kush Club</span>
+        <span class="badge status-stuck">🚫 STUCK</span>
+        <span class="a-note">DKC email update
 
-200 to 300 transactions a day ..
+Hi guys,
 
-flow hub currently 
-
-Dan &amp; Ari
-
-
-
-flow hub semi integrated .. back hub sucks clunky for the customer
-
-tip the budtender is a horrible process
-
-integration over any kickback and fees****
-
-
-
-when the</span>
-        <span class="a-date">Krysta Jones · Jul 15, 2026</span>
-      </div><div class="activity-row">
-        <span class="a-merchant">Stateline Cannabis</span>
-        <span class="badge status-working-on-it">⏳ WORKING ON IT</span>
-        <span class="a-note">Got it. Thanks for the heads up</span>
-        <span class="a-date">Krysta Jones · Jul 15, 2026</span>
-      </div><div class="activity-row">
-        <span class="a-merchant">Stateline Cannabis</span>
-        <span class="badge status-working-on-it">⏳ WORKING ON IT</span>
-        <span class="a-note">@Krysta Jones Suydam just FYI, Phil has closed this deal just now, we are in the process of signing the app</span>
-        <span class="a-date">Krysta Jones · Jul 14, 2026</span>
-      </div><div class="activity-row">
-        <span class="a-merchant">Long Island Cannabis Club</span>
-        <span class="badge status-lead">Lead</span>
-        <span class="a-note">connected with sue planning an inperson visit while in town</span>
-        <span class="a-date">Unassigned · Jul 14, 2026</span>
-      </div><div class="activity-row">
-        <span class="a-merchant">Space Jam Dispensary</span>
-        <span class="badge status-working-on-it">⏳ WORKING ON IT</span>
-        <span class="a-note">emailed and hit ig msger</span>
-        <span class="a-date">Krysta Jones · Jul 14, 2026</span>
+I just wanted to circle back with you. My team has some reservations about switching to a system that doesn’t integrate with Flowhub. I’m also still working through some staffing challenges, and they’re concerned that havi</span>
+        <span class="a-date">Krysta Jones · Jul 23, 2026</span>
       </div><div class="activity-row">
         <span class="a-merchant">The Cake House Santa Rosa</span>
-        <span class="badge status-lead">Lead</span>
-        <span class="a-note">call went good he's going to shop around not interested in $4 surcharge
-
-
-
-wants option 2</span>
-        <span class="a-date">Unassigned · Jul 14, 2026</span>
+        <span class="badge status-contacted">📞 CONTACTED</span>
+        <span class="a-note">Eric emailed back - signed up for another processor. They charge $1.50 per transaction, no other fees or charges, no contract, no exclusivity agreement, etc. If I end up not liking them I will reach back out.</span>
+        <span class="a-date">Krysta Jones · Jul 23, 2026</span>
       </div><div class="activity-row">
-        <span class="a-merchant">The Cake House Santa Rosa</span>
+        <span class="a-merchant">The Alchemy Flatiron – 18th St</span>
+        <span class="badge status-contacted">📞 CONTACTED</span>
+        <span class="a-note">sent email follow-up to Julianna, who is who I met in person at the store and recognized me and knows sanja</span>
+        <span class="a-date">Krysta Jones · Jul 23, 2026</span>
+      </div><div class="activity-row">
+        <span class="a-merchant">Aurum Botanics</span>
+        <span class="badge status-contacted">📞 CONTACTED</span>
+        <span class="a-note">Emailed Marissa and Aaron to request a call</span>
+        <span class="a-date">Krysta Jones · Jul 23, 2026</span>
+      </div><div class="activity-row">
+        <span class="a-merchant">Aurum Botanics</span>
+        <span class="badge status-working-on-it">⏳ WORKING ON IT</span>
+        <span class="a-note">Stopped by and spoke with the manager on site, Marissa, and noticed they have an atm that does 3.50 and at the register it is $3 they also mentioned reliability and tap</span>
+        <span class="a-date">Krysta Jones · Jul 23, 2026</span>
+      </div><div class="activity-row">
+        <span class="a-merchant">Cyphers</span>
+        <span class="badge status-working-on-it">⏳ WORKING ON IT</span>
+        <span class="a-note">DM them on IG to see if I can get a response there is no other way to contact them</span>
+        <span class="a-date">Krysta Jones · Jul 23, 2026</span>
+      </div><div class="activity-row">
+        <span class="a-merchant">Cyphers</span>
         <span class="badge status-lead">Lead</span>
-        <span class="a-note">Mikaela
+        <span class="a-note">New dispensary coming online in NY they had signs every where
 
-option 1
+https://cyphersbk.com/</span>
+        <span class="a-date">Unassigned · Jul 23, 2026</span>
+      </div><div class="activity-row">
+        <span class="a-merchant">CLTV8</span>
+        <span class="badge status-lead">Lead</span>
+        <span class="a-note">Hall of flowers contact not a lead</span>
+        <span class="a-date">Mikaela McLaughlin · Jul 22, 2026</span>
+      </div><div class="activity-row">
+        <span class="a-merchant">Intrinsic</span>
+        <span class="badge status-lead">Lead</span>
+        <span class="a-note">@Krysta Jones Suydam new inbound!</span>
+        <span class="a-date">Krysta Jones · Jul 22, 2026</span>
+      </div><div class="activity-row">
+        <span class="a-merchant">Brotherly Bud Dispensary</span>
+        <span class="badge status-working-on-it">⏳ WORKING ON IT</span>
+        <span class="a-note">Stopped by in person with Leena to introduce me to Neil the GM, and a budtender that gave us info that the tap isnt working and they reacently went down.
 
-$4 surcharge ...
 
-.50 cents to the dutchie integrating ..
 
-$1.50 rebate basically giving you a $2 rebate.. . 50 cents goes to dutchie
+Steve is the owner.
 
 
 
-Option 2
-
-stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o rebat</span>
-        <span class="a-date">Unassigned · Jul 14, 2026</span>
-      </div><div class="activity-footnote">+ 37 additional routine touches (emails/texts/calls) logged this week, not shown individually.</div></div>
+Left card and will follow up</span>
+        <span class="a-date">Krysta Jones · Jul 22, 2026</span>
+      </div><div class="activity-row">
+        <span class="a-merchant">Quality Cannabliss</span>
+        <span class="badge status-working-on-it">⏳ WORKING ON IT</span>
+        <span class="a-note">Leena intro. Women own</span>
+        <span class="a-date">Krysta Jones · Jul 22, 2026</span>
+      </div><div class="activity-footnote">+ 4 additional routine touches (emails/texts/calls) logged this week, not shown individually.</div></div>
       </div>
     </section>
 
@@ -618,14 +580,14 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <span class="desc">45+ days without logged activity</span>
       </div>
       <div class="card"><div id="atrisk-body"><table><thead><tr>
-      <th>Deal</th><th>Rep</th><th>Stage</th><th>Terminals</th><th>Last Activity</th><th>Days Since</th><th>Notes</th>
+      <th>Deal</th><th>Rep</th><th>Stage</th><th>Locations</th><th>Last Activity</th><th>Days Since</th><th>Notes</th>
     </tr></thead><tbody><tr>
         <td><strong>Stephanie Luz Banker</strong></td>
         <td>Phil Margolin</td>
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>—</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>House of Dank</strong></td>
@@ -633,7 +595,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>—</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Nu Era</strong></td>
@@ -641,7 +603,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>—</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Kind Farms</strong></td>
@@ -649,7 +611,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>3</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>1937 Group</strong></td>
@@ -657,7 +619,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>—</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Cape Ann</strong></td>
@@ -665,7 +627,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-offer-sent">OFFER SENT</span></td>
         <td>2</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Trinity Compassionate Care Centers</strong></td>
@@ -673,7 +635,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>—</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Loan Peak Caregivers</strong></td>
@@ -681,7 +643,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-offer-sent">OFFER SENT</span></td>
         <td>—</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Oasis Cannabis Superstore</strong></td>
@@ -689,7 +651,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>—</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Redi</strong></td>
@@ -697,7 +659,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>1</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Rev Clinics</strong></td>
@@ -705,7 +667,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>3</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Greenlight</strong></td>
@@ -713,7 +675,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>30</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>30 terminals — largest untouched lead</td>
       </tr><tr>
         <td><strong>Viola Brands</strong></td>
@@ -721,7 +683,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>12</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Botanist (Acreage)</strong></td>
@@ -729,7 +691,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>—</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Big Sky Buds</strong></td>
@@ -737,7 +699,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>—</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>6 Bricks - Payton</strong></td>
@@ -745,7 +707,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-offer-sent">OFFER SENT</span></td>
         <td>—</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>ELEVATE</strong></td>
@@ -753,7 +715,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>8</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Garden State Natural Green</strong></td>
@@ -761,7 +723,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-offer-sent">OFFER SENT</span></td>
         <td>1</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Nube</strong></td>
@@ -769,7 +731,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-uw-approved">✅ UW APPROVED</span></td>
         <td>2</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>UW approved 8 weeks ago — stalled at the finish line</td>
       </tr><tr>
         <td><strong>Dr Jackie / Green Philosophy 716</strong></td>
@@ -777,7 +739,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-stuck">🚫 STUCK</span></td>
         <td>1</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>HPN MN</strong></td>
@@ -785,7 +747,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>1</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Studio 57</strong></td>
@@ -793,7 +755,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-offer-sent">OFFER SENT</span></td>
         <td>1</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Flynstonned</strong></td>
@@ -801,7 +763,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-offer-sent">OFFER SENT</span></td>
         <td>18</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Takoma Wellness</strong></td>
@@ -809,7 +771,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-contacted">📞 CONTACTED</span></td>
         <td>1</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Surterra</strong></td>
@@ -817,7 +779,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-negotiation">🤝 NEGOTIATION</span></td>
         <td>50</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>50 terminals — single biggest deal in the pipeline, stalled 8 weeks. Top priority.</td>
       </tr><tr>
         <td><strong>Get Potency Tony</strong></td>
@@ -825,7 +787,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-negotiation">🤝 NEGOTIATION</span></td>
         <td>1</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>King City Gardens</strong></td>
@@ -833,7 +795,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-offer-sent">OFFER SENT</span></td>
         <td>3</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Capital District Cannabis Wellness NY</strong></td>
@@ -841,7 +803,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-negotiation">🤝 NEGOTIATION</span></td>
         <td>3</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr><tr>
         <td><strong>Exclusive MI</strong></td>
@@ -849,7 +811,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
         <td><span class="badge status-negotiation">🤝 NEGOTIATION</span></td>
         <td>5</td>
         <td>May 18, 2026</td>
-        <td style="color:var(--red);font-weight:700;">61 days</td>
+        <td style="color:var(--red);font-weight:700;">67 days</td>
         <td>—</td>
       </tr></tbody></table></div></div>
     </section>
@@ -865,7 +827,7 @@ stay at $3.50 then we can do $1.00 rebate and we cover dutchie .50 cents $1.5o r
   </div>
 
   <footer class="brief-footer">
-    <span>🌱 Live sources: Store Visit Expense Log · Post Event Recap Log · Post In-Market Visit Recap Log · MK — Team Pipeline &amp; Coaching (Master) · Deal Approval Requests. Project Movement: static snapshot of the Project Tracker artifact.</span>
+    <span>🌱 Live sources: Store Visit Expense Log · Post Event Recap Log · Post In-Market Visit Recap Log · MK — Team Pipeline &amp; Coaching (Master) · Deal Approval Requests. Project Movement: synced snapshot of the Project Tracker artifact.</span>
     <span id="gen-stamp">🔄 Reload this view to pull the latest week’s live data.</span>
   </footer>
 
@@ -1195,7 +1157,7 @@ function renderCoaching(items){
       </tr>`;
     }).join('');
     atRiskBody.innerHTML = `<table><thead><tr>
-      <th>Deal</th><th>Rep</th><th>Stage</th><th>Terminals</th><th>Last Activity</th><th>Days Since</th><th>Notes</th>
+      <th>Deal</th><th>Rep</th><th>Stage</th><th>Locations</th><th>Last Activity</th><th>Days Since</th><th>Notes</th>
     </tr></thead><tbody>${rows}</tbody></table>`;
   }
   return { weekly, monthly, atRisk };
@@ -1238,113 +1200,150 @@ function renderApprovals(items){
   return { pending, decidedThisWeek };
 }
 
-// ================= PROJECT MOVEMENT (static snapshot of Project Tracker artifact) =================
-// Manually confirmed from /Claude/Artifacts/project-tracker/index.html on 2026-07-16.
-// This artifact's data lives in that app's own local storage, not monday.com, so it
-// cannot be pulled live here. Ask Claude to re-read Project Tracker and refresh this
-// section whenever priorities shift.
+// ================= PROJECT MOVEMENT (synced snapshot of Project Tracker artifact) =================
+// Synced live from the Project Tracker artifact's own data on 2026-07-24 (via its PT_EXPORT hook).
+// That artifact stores its data in the browser, not monday.com, so this is a point-in-time copy.
+// Ask Claude to "refresh the project tracker" to re-sync this section whenever priorities shift.
+// De-duped: the four standalone "SEO Rollout — Days X" projects are shown as phases inside the
+// combined "SEO Rollout — 90-Day Program" rollup rather than listed twice.
 const PROJECT_SNAPSHOT = {
-  asOf: '2026-07-16',
+  asOf: '2026-07-24',
+  movedThisWeek: 30,
+  workstreams: 7,
+  totalTasks: 186,
   projects: [
     {
-      name: 'Sales SOP Rollout',
-      status: 'In Progress',
-      entity: 'Other / Umbrella',
+      name: 'Hire: BDR — Alleaves', status: 'In Progress', entity: 'Alleaves (POS)',
+      desc: "End-to-end workflow for hiring Alleaves' next BDR — requisition through 90-day ramp.",
+      counts: { total: 30, done: 0, inProgress: 2, todo: 28 }, moved: 13,
+      phases: [
+        { name: 'Define & Approve Role', status: 'Done', moved: true },
+        { name: 'Source & Screen', status: 'Done', moved: true },
+        { name: 'Interview & Select', status: 'Not Started', moved: true },
+        { name: 'Dry Dock Prep — Before Day 1', status: 'Not Started' },
+        { name: 'Onboarding & Ramp — First 90 Days', status: 'Not Started' },
+        { name: "Post-Ramp — What's Next", status: 'Not Started' },
+      ],
+      note: 'Biggest mover this week — role defined and approved, candidates sourced & screened; now moving into interviews.'
+    },
+    {
+      name: 'Hire: Director of Sales — Alleaves', status: 'In Progress', entity: 'Alleaves (POS)',
+      desc: "End-to-end workflow for hiring Alleaves' Director of Sales — role definition through strategic ramp.",
+      counts: { total: 28, done: 0, inProgress: 2, todo: 26 }, moved: 9,
+      phases: [
+        { name: 'Define & Align', status: 'Done', moved: true },
+        { name: 'Source & Screen', status: 'Not Started', moved: true },
+        { name: 'Interview & Select', status: 'Not Started' },
+        { name: 'Dry Dock Prep — Before Day 1', status: 'Not Started' },
+        { name: 'Onboarding & Strategic Ramp', status: 'Not Started' },
+        { name: "Post-Ramp — What's Next", status: 'Not Started' },
+      ],
+      note: 'Role scope, comp package (exec-approved) and JD all done; now in confidential outreach and initial screens for leadership candidates.'
+    },
+    {
+      name: 'Sales SOP Rollout', status: 'In Progress', entity: 'SALT (Payments)',
       desc: 'Standardize and roll out the new sales process SOP across the team.',
-      tasks: [
-        { title: 'Draft sales SOP document', status: 'Done', due: '2026-07-03' },
-        { title: 'Circulate draft for team feedback', status: 'Done', due: '2026-07-07' },
-        { title: 'Incorporate feedback & finalize doc', status: 'In Progress', due: '2026-07-16', movedThisWeek: true },
-        { title: 'Build training deck for team walkthrough', status: 'To Do', due: '2026-07-21' },
-        { title: 'Schedule training session', status: 'To Do', due: '2026-07-24' },
-        { title: 'Publish final SOP to shared drive', status: 'To Do', due: '2026-07-25' },
-        { title: 'Collect adoption feedback (30-day check-in)', status: 'To Do', due: '2026-08-24' },
+      counts: { total: 8, done: 0, inProgress: 0, todo: 8 }, moved: 3,
+      movedTasks: [
+        { title: 'Schedule training session', status: 'Done' },
+        { title: 'Build training deck for team walkthrough', status: 'To Do' },
+        { title: 'Publish final SOP to shared drive', status: 'To Do' },
       ]
     },
     {
-      name: 'SALT Merchant Referral Pilot',
-      status: 'Not Started (Phase 0 In Progress)',
-      entity: 'SALT (Payments)',
+      name: 'Deal Follow Ups', status: 'In Progress', entity: 'SALT (Payments)',
+      desc: 'Ongoing items to work deals with or for the team.',
+      counts: { total: 3, done: 0, inProgress: 3, todo: 0 }, moved: 3, /* status flipped Done→In Progress since last sync */
+      movedTasks: [
+        { title: 'East Coast Cannabis — Maine', status: 'In Progress' },
+        { title: 'MHW', status: 'In Progress' },
+        { title: 'Cake House Santa Rosa', status: 'In Progress' },
+      ]
+    },
+    {
+      name: 'SALT Merchant Referral Pilot', status: 'In Progress', entity: 'SALT (Payments)',
       desc: 'Controlled pilot rewarding referral partners for warm merchant introductions with finite, milestone-based payments. $60,250 pilot cap · up to $13,000 max per referral · 90-day measured window.',
+      counts: { total: 41, done: 0, inProgress: 6, todo: 35 }, moved: 2,
       phases: [
-        {
-          name: 'Pre-Launch: Cross-Functional Setup',
-          status: 'In Progress',
-          note: 'In progress as of the 7/15 cross-functional alignment call — a follow-up call is still needed before launch.',
-          movedThisWeek: true,
-          tasks: [
-            { title: 'Finalize & document payout methodology (tiers, thresholds, calc rules)', status: 'In Progress', assignee: 'Rev&A', priority: 'P0', note: 'On the 7/15 call the per-referral cap was read aloud as "$30,000" — likely a transcription slip for $13,000 per source docs. Worth a quick confirm with Rev&A before this is finalized.' },
-            { title: "Define 'qualified net-new lead' and 'dormant' standards", status: 'To Do', assignee: 'Sales', priority: 'P0' },
-            { title: 'Draft & get Legal approval on referral partner agreement template', status: 'To Do', assignee: 'Legal', priority: 'P0', note: 'Blocks all of Phase A onboarding.' },
-          ]
-        },
+        { name: 'Pre-Launch: Cross-Functional Setup', status: 'Not Started', moved: true },
         { name: 'Phase A — Partner Onboarding', status: 'Not Started' },
         { name: 'Phase B — Referral & First Payment ($50/$100)', status: 'Not Started' },
         { name: 'Phase C — Signing Bonus ($250)', status: 'Not Started' },
         { name: 'Phase D — 90-Day Volume Kicker (up to $12.7K)', status: 'Not Started' },
         { name: 'Ongoing Controls, Reporting & Exceptions', status: 'Not Started' },
         { name: 'Pilot Evaluation & Go/No-Go Decision', status: 'Not Started' },
+      ],
+      note: 'Moved this week: standing up the GTM/Ops referral tracker (system of record).'
+    },
+    {
+      name: 'Alleaves POS CRM Diligence & Procurement', status: 'In Progress', entity: 'Alleaves (POS)',
+      desc: 'Evaluating CRM options for sales & CS across Alleaves POS and other portfolio companies (Reevo / Attio / Copper).',
+      counts: { total: 31, done: 0, inProgress: 2, todo: 29 }, moved: 0,
+      phases: [
+        { name: 'Framework & Shortlist Setup', status: 'Not Started' },
+        { name: 'Reevo Evaluation', status: 'Not Started' },
+        { name: 'Attio Evaluation', status: 'Not Started' },
+        { name: 'Copper Evaluation', status: 'Not Started' },
+        { name: 'Comparison & Decision', status: 'Not Started' },
+        { name: 'Procurement & Migration', status: 'Not Started' },
+      ]
+    },
+    {
+      name: 'SEO Rollout — 90-Day Program', status: 'In Progress', entity: 'SALT (Payments)',
+      desc: 'Phased 90-day SEO rollout: baseline & quick wins, funnel build-out, proof & reporting, and ongoing cadence.',
+      counts: { total: 45, done: 0, inProgress: 0, todo: 45 }, moved: 0,
+      phases: [
+        { name: 'Days 1–30: Baseline & Quick Wins', status: 'Not Started' },
+        { name: 'Days 31–60: Build the Funnel', status: 'Not Started' },
+        { name: 'Days 61–90: Proof & Reporting', status: 'Not Started' },
+        { name: 'Ongoing Cadence', status: 'Not Started' },
       ]
     }
-  ],
-  otherInitiatives: [
-    'Alleaves POS CRM Due Diligence & Procurement (Reevo / Attio / Copper evaluation)',
-    'SEO Rollout — 90-Day Program'
   ]
 };
 
 function renderProjectSnapshot(){
   document.getElementById('proj-snapshot-date').textContent = fmtDate(PROJECT_SNAPSHOT.asOf);
-  const movedCount = PROJECT_SNAPSHOT.projects.reduce((sum, p) => {
-    let c = 0;
-    (p.tasks||[]).forEach(t => { if (t.movedThisWeek) c++; });
-    (p.phases||[]).forEach(ph => {
-      if (ph.movedThisWeek) c++;
-      (ph.tasks||[]).forEach(t => { if (t.movedThisWeek) c++; });
-    });
-    return sum + c;
-  }, 0);
-  document.getElementById('proj-count').textContent = movedCount;
+  document.getElementById('proj-count').textContent = PROJECT_SNAPSHOT.movedThisWeek;
+
+  const countsLine = c => {
+    const parts = [];
+    parts.push(`${c.total} task${c.total === 1 ? '' : 's'}`);
+    if (c.done) parts.push(`${c.done} done`);
+    if (c.inProgress) parts.push(`${c.inProgress} in progress`);
+    if (c.todo) parts.push(`${c.todo} to do`);
+    return parts.join(' · ');
+  };
 
   const projectHtml = PROJECT_SNAPSHOT.projects.map(p => {
-    let phasesHtml = '';
-    if (p.tasks){
-      phasesHtml += p.tasks.map(t => `
+    let body = '';
+    if (p.movedTasks && p.movedTasks.length){
+      body += p.movedTasks.map(t => `
         <div class="task-line">
-          <span class="task-title">${esc(t.title)}${t.movedThisWeek ? '<span class="flag">🌈 MOVED THIS WEEK</span>' : ''}</span>
+          <span class="task-title">${esc(t.title)}<span class="flag">🌈 MOVED THIS WEEK</span></span>
           ${badge(t.status)}
-          <span class="task-meta">due ${fmtDate(t.due)}</span>
         </div>`).join('');
     }
-    if (p.phases){
-      phasesHtml += p.phases.map(ph => {
-        const taskLines = (ph.tasks||[]).map(t => `
-          <div class="task-line">
-            <span class="task-title">${esc(t.title)}</span>
-            ${badge(t.status)}
-            ${t.priority ? badge(t.priority, 'badge priority-'+slug(t.priority)) : ''}
-            ${t.assignee ? `<span class="task-meta">${esc(t.assignee)}</span>` : ''}
-            ${t.note ? `<div class="note-callout" style="width:100%;">${esc(t.note)}</div>` : ''}
-          </div>`).join('');
-        return `<div class="phase-row">
-          <div class="phase-title">${esc(ph.name)}${ph.movedThisWeek ? '<span class="flag">🌈 MOVED THIS WEEK</span>' : ''} ${badge(ph.status)}</div>
-          ${ph.note ? `<div class="phase-desc">${esc(ph.note)}</div>` : ''}
-          ${taskLines}
-        </div>`;
-      }).join('');
+    if (p.phases && p.phases.length){
+      body += `<div class="phase-chips">` + p.phases.map(ph =>
+        `<span class="phase-chip">${esc(ph.name)} ${badge(ph.status)}${ph.moved ? '<span class="flag">🌈</span>' : ''}</span>`
+      ).join('') + `</div>`;
     }
+    if (p.note){
+      body += `<div class="phase-desc">${esc(p.note)}</div>`;
+    }
+    const movedFlag = p.moved ? `<span class="flag">🌈 ${p.moved} moved this week</span>` : '';
     return `<div class="proj-card">
-      <h3>${esc(p.name)} ${badge(p.status)} <span class="type-pill">${esc(p.entity)}</span></h3>
+      <h3>${esc(p.name)} ${badge(p.status)} <span class="type-pill">${esc(p.entity)}</span>${movedFlag}</h3>
       <div class="proj-desc">${esc(p.desc)}</div>
-      ${phasesHtml}
+      <div class="proj-counts">${esc(countsLine(p.counts))}</div>
+      ${body}
     </div>`;
   }).join('');
 
-  const otherHtml = PROJECT_SNAPSHOT.otherInitiatives.length
-    ? `<div class="other-init">Also active in Project Tracker but not detailed here — confirm current phase before including: ${PROJECT_SNAPSHOT.otherInitiatives.map(esc).join(' · ')}</div>`
-    : '';
+  const summary = `<div class="other-init">Synced live from Project Tracker on ${fmtDate(PROJECT_SNAPSHOT.asOf)} · ${PROJECT_SNAPSHOT.workstreams} active workstreams · ~${PROJECT_SNAPSHOT.totalTasks} open tasks · ${PROJECT_SNAPSHOT.movedThisWeek} items moved this week.</div>`;
 
-  document.getElementById('proj-card-wrap').innerHTML = projectHtml + otherHtml;
+  document.getElementById('proj-card-wrap').innerHTML = projectHtml + summary;
 }
 
 // ---------- KPI strip ----------
